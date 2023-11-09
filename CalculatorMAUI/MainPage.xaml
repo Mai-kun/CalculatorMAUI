@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalculatorMAUI.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <StyleSheet Source="Resources/Styles/StyleMainPage.css" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <!-- Menu -->
+        <Grid class="MenuContentGrid"
+              BackgroundColor="Black">
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="GridArea_Tapped"/>
+            </Grid.GestureRecognizers>
+
+            
+            <Label
+                Text="Навигацинное меню"
+                HorizontalOptions="Start"
+                Margin="10"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                FontAttributes="Bold"
+                Grid.Row="0" Grid.Column="0"/>
+
+            <VerticalStackLayout 
+                Grid.Row="1" Grid.Column="0"
+                HorizontalOptions="Start">
+
+                <Label
+                    Text="Матрицы"
+                    BackgroundColor="Black"
+                    Margin="6"
+                    TextColor="White"/>                
+                
+                
+                <Button class="ButtonMenu"
+                    Text="Оперции с матрицами"
+                    BackgroundColor="Black"
+                    Margin="6"
+                    BorderWidth="0.1"
+                    BorderColor="Orange"/>
+
+
+                <Label
+                    Text="Переводы"
+                    BackgroundColor="Black"
+                    Margin="6"
+                    TextColor="White"/>
+                
+                <Button class="ButtonMenu"
+                        Text="Перевод данных"
+                        BackgroundColor="Black"
+                        Margin="6"
+                        Clicked="ButtonGoToConvertPageData"
+                        BorderWidth="0.1"
+                        BorderColor="Orange"/>
+
+                <Button class="ButtonMenu"
+                        Text="Перевод температур"
+                        BackgroundColor="Black"
+                        Margin="6"
+                        Clicked="ButtonGoToConvertPageTemp"
+                        BorderWidth="0.1"
+                        BorderColor="Orange"/>
+
+                <Button class="ButtonMenu"
+                        Text="Крестики-нолики"
+                        BackgroundColor="Black"
+                        Margin="6"
+                        Clicked="ButtonGoToTicTacToePage"
+                        BorderWidth="0.1"
+                        BorderColor="Orange"/>
+
+            </VerticalStackLayout>
+            
+        </Grid>
+
+        <!-- MainPage -->
+        <Grid class="ContentGrid"
+            x:Name="MainContentGrid"
+            BackgroundColor="Black">
+
+            <Grid.RowDefinitions> <!-- 10 -->
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions> <!-- 5 -->
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <Border 
+                StrokeThickness="0.5"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                Margin="3"
+                BackgroundColor="Transparent"
+                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8">
+
+                <Entry
+                    x:Name="TextField"
+                    Text="   "
+                    FontAutoScalingEnabled="True"
+                    Margin="6"
+                    IsEnabled="False"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    FontSize="40"
+                    TextChanged="TextField_TextChanged"/>
+            </Border>
+
+            <Border 
+                StrokeThickness="0.5"
+                Margin="3"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                BackgroundColor="Transparent"
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8">
+
+                <Entry
+                    x:Name="TextFieldAnswer"
+                    Margin="6"
+                    IsEnabled="False"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    TextColor="Gray"/>
+            </Border>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnHistory"
+                Text="&#10710;"
+                FontSize="35"
+                Grid.Row="8" Grid.Column="0"/>
+            <!-- do History-->
+
+            <Button 
+                class="symbol"
+                x:Name="btnMenu"
+                Text="Menu"
+                FontAttributes="Bold"
+                Clicked="ShowMenu"
+                Grid.Row="9" Grid.Column="0"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnClean"
+                Text="CE"
+                Clicked="ButtonCleanAll"
+                Grid.Row="5" Grid.Column="1"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnPersent"
+                Text="%"
+                Clicked="ButtonCalcPersent"
+                Grid.Row="5" Grid.Column="3"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnDeleteSymbol"
+                Text="&#9003;"
+                FontSize="30"
+                Clicked="ButtonCleanSymbol"
+                Grid.Row="5" Grid.Column="2"/>
+
+
+            <!--#region ButtonNumbers and ButtonComma -->
+            <Button
+                class="num"
+                x:Name="btnNum1"
+                Text="1"
+                Clicked="ButtonPrint1"
+                Grid.Row="8" Grid.Column="1"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum2"
+                Text="2"
+                Clicked="ButtonPrint2"
+                Grid.Row="8" Grid.Column="2"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum3"
+                Text="3"
+                Clicked="ButtonPrint3"
+                Grid.Row="8" Grid.Column="3"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum4"
+                Text="4"
+                Clicked="ButtonPrint4"
+                Grid.Row="7" Grid.Column="1"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum5"
+                Text="5"
+                Clicked="ButtonPrint5"
+                Grid.Row="7" Grid.Column="2"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum6"
+                Text="6"
+                Clicked="ButtonPrint6"
+                Grid.Row="7" Grid.Column="3"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum7"
+                Text="7"
+                Clicked="ButtonPrint7"
+                Grid.Row="6" Grid.Column="1"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum8"
+                Text="8"
+                Clicked="ButtonPrint8"
+                HorizontalOptions="Center"
+                Grid.Row="6" Grid.Column="2"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum9"
+                Text="9"
+                Clicked="ButtonPrint9"
+                Grid.Row="6" Grid.Column="3"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum0"
+                Text="0"
+                Clicked="ButtonPrint0"
+                Grid.Row="9" Grid.Column="2"/>
+
+            <Button
+                class="num"
+                x:Name="btnNum00"
+                Text="00"
+                Clicked="ButtonPrint00"
+                Grid.Row="9" Grid.Column="1"/>
+
+            <Button
+                x:Name="btnComma"
+                Text=","
+                Clicked="ButtonPrintComma"
+                Grid.Row="9" Grid.Column="3"/>
+            <!--#endregion-->
+
+
+            <!--#region ButtonMathematicalSigns -->
+            <Button
+                class="symbol"
+                x:Name="btnDivision"
+                Text="/"
+                FontSize="35"
+                Clicked="ButtonPrintDivision"
+                Grid.Row="5" Grid.Column="4"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnMultiplication"
+                Text="*"
+                FontSize="35"
+                Clicked="ButtonPrintMultiplication"
+                Grid.Row="6" Grid.Column="4"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnMinus"
+                Text="-"
+                FontSize="35"
+                Clicked="ButtonPrintMinus"
+                Grid.Row="7" Grid.Column="4"/>
+
+            <Button
+                class="symbol"
+                x:Name="btnPlus"
+                Text="+"
+                FontSize="35"
+                Clicked="ButtonPrintPlus"
+                Grid.Row="8" Grid.Column="4"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnPow"
+                Text="^"
+                Clicked="ButtonPrintPowSign"
+                Grid.Row="3" Grid.Column="0"/>
+            <!--#endregion-->
+
+            <Border 
+                Grid.Row="9" Grid.Column="4"
+                BackgroundColor="DarkOrange"
+                StrokeShape="RoundRectangle 40,40,40,40">
+                
+                <Button
+                    x:Name="btnAnswer"
+                    Text="="
+                    FontSize="40"
+                    Clicked="ButtonAnswer"
+                    BackgroundColor="Transparent"/>
+            </Border>
+
+            <!--#region MathematicFunctions -->
+            <Button
+                class="otherButtons"
+                x:Name="btnSin"
+                Text="sin"
+                Clicked="ButtonPrintSin"
+                Grid.Row="2" Grid.Column="2"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnCos"
+                Text="cos"
+                Clicked="ButtonPrintCos"
+                Grid.Row="2" Grid.Column="3"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnTan"
+                Text="tg"
+                Clicked="ButtonPrintTan"
+                Grid.Row="2" Grid.Column="4"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnCtg"
+                Text="ctg"
+                Clicked="ButtonPrintCtg"
+                Grid.Row="3" Grid.Column="4"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnSec"
+                Text="sec"
+                Clicked="ButtonPrintSec"
+                Grid.Row="3" Grid.Column="2"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnCsc"
+                Text="csc"
+                Clicked="ButtonPrintCsc"
+                Grid.Row="3" Grid.Column="3"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnLog"
+                Text="log"
+                Clicked="ButtonPrintLog"
+                Grid.Row="4" Grid.Column="1"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnLn"
+                Text="ln"
+                Clicked="ButtonPrintLn"
+                Grid.Row="4" Grid.Column="2"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnAbsolut"
+                Text="|x|"
+                Clicked="ButtonPrintAbsolut"
+                Grid.Row="3" Grid.Column="1"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnExp"
+                Text="exp"
+                Clicked="ButtonPrintExp"
+                Grid.Row="4" Grid.Column="0"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnFactorial"
+                Text="n!"
+                Clicked="ButtonPrintFactorial"
+                Grid.Row="5" Grid.Column="0"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnReversedPower"
+                Text="1/x"
+                Clicked="ButtonPrintReversedPower"
+                Grid.Row="6" Grid.Column="0"/>
+            <!--#endregion-->
+
+            <Button
+                class="otherButtons"
+                x:Name="btnLeftBracket"
+                Text="("
+                Clicked="ButtonPrintLeftBracket"
+                Grid.Row="4" Grid.Column="3"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnRightBracket"
+                Text=")"
+                Clicked="ButtonPrintRightBracket"
+                Grid.Row="4" Grid.Column="4"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnE"
+                Text="e"
+                Clicked="ButtonPrintExpNumber"
+                Grid.Row="2" Grid.Column="1"/>
+
+            <Button
+                class="otherButtons"
+                x:Name="btnPi"
+                Text="𝝅"
+                Clicked="ButtonPrintPiNumber"
+                Grid.Row="2" Grid.Column="0"/>
+
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

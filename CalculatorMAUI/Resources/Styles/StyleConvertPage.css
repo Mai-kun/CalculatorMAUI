@@ -1,0 +1,20 @@
+
+Grid Entry {
+    font-size: 25;
+    color: white;
+}
+
+Grid Editor {
+    font-size: 25;
+    color: white;
+}
+
+.ConvertData button {
+    font-size: 35;
+    color: white;
+    padding: 1;
+    height: 90;
+    width: 70;
+    align-items: center;
+    background-color: transparent;
+}

@@ -1,0 +1,48 @@
+.MenuContentGrid Label{
+    font-size: 35;
+    color: Black;
+    background-color: White;
+}
+
+.ButtonMenu {
+    height: 55;
+    width: 250;
+    justify-content: left;
+    color: white;
+    font-size: 20;
+}
+
+.ContentGrid Button {
+    width: 70;
+    height: 60;
+    font-size: 20;
+    color: white;
+    background-color: transparent;
+    padding: 1;
+    border-color: #1F1F1F;
+    border-radius: 4;
+}
+
+.ContentGrid Label {
+    font-size: 35;
+    color: Black;
+    background-color: White;
+}
+
+Grid Entry {
+    font-size: 35;
+    color: white;
+    background-color: transparent;
+}
+
+.num {
+    font-size: 30;
+}
+
+.symbol {
+    color: orange;
+}
+
+.otherButtons{
+    color: #8f8f8f;
+}
